@@ -1,40 +1,335 @@
-a//tmp/AluCalc1/js/main.js → b//tmp/AluCalc1/js/main.js
-@@ -1,695 +1,655 @@
--
--        // ============================================================
--        // CATÁ LOGO MAESTRO AMPLIADO
--        // ============================================================
--        const CATÁLOGO = {
--            "ventana_corrediza_estandar": {
--                "nombre": "Ventana corrediza estándar",
--                "categoria": "ventanas",
--                "icono": "ðŸªŸ",
--                "tipoVidrio": "4mm",
--                "perfiles": [
--                    { "nombre": "Riel / Jamba cabezal", "cantidad": 1, "formula": "ancho", "corte": "90°" },
--                    { "nombre": "Jambas verticales", "cantidad": 2, "formula": "alto - 26", "corte": "90°" },
--                    { "nombre": "Zoclo / Cabezal", "cantidad": 2, "formula": "(ancho - 185) / 2", "corte": "90°" }
--                ],
--                "vidrio": [
--                    { "nombre": "Vidrio fijo 4mm", "cantidad": 1, "ancho": "(ancho - 151) / 2", "alto": "alto - 125",
--                        "tipo": "4mm" },
--                    { "nombre": "Vidrio corredizo 4mm", "cantidad": 1, "ancho": "(ancho - 151) / 2",
--                    "alto": "alto - 135", "tipo": "4mm" }
--                ],
--                "notas": "ðŸ”§ Usar felpa en zoclo y cabezal para deslizamiento suave. Revisar escuadra antes de ensamblar.",
--                "porcentajeHerrajesOverride": nulo
--            },
--            "ventana_3_hojas_telescópica": {
--                "nombre": "Ventana 3 hojas telescópica",
--                "categoria": "ventanas",
--                "icono": "ðŸªŸ",
--                "tipoVidrio": "6mm",
--                "perfiles": [
--                    { "nombre": "Riel de 3\"", "cantidad": 1, "formula": "ancho", "corte": "90°" },
--                    { "nombre": "Jamba de 3\" (cabezal)", "cantidad": 1, "formula": "ancho", "corte": "90°" },
--                    { "nombre": "Adaptador paloma", "cantidad": 1, "formula": "ancho - 65", "corte": "90°" },
--                    { "nombre": "Jambas de 3\"", "cantidad": 2, "formula": "alto - 26", "corte": "90°" },
--                    { "nombre": "Zoclo / Cabezal de 3\"", "cantidad": 3, "formula": "(ancho - 167) / 3",
+/* ============================================================
+   CONFIGURACIÓN — EDITA SOLO ESTA PARTE
+   ============================================================ */
+const CONFIG = {
+  marca:{
+    nombre:"Alfa y Omega",
+    nombreCompleto:"Alfa y Omega Aluminios & Cristales",
+    lema:"Soluciones en aluminio y cristal",
+    telefono:"33 17 41 34 54",
+    telefonoLink:"tel:+523317413454",
+    whatsapp:"523317413454",
+    email:"contacto@alfayomega.com",
+    direccion:"Guadalajara, Jalisco, México",
+    logo:"https://placehold.co/180x50/0B0F14/D4AF6B?text=ALFA+Y+OMEGA",
+    ogImage:"https://placehold.co/1200x630/0B0F14/D4AF6B?text=Alfa+y+Omega"
+  },
+  colores:{carbon:"#0B0F14",plata:"#B7B9BD",dorado:"#D4AF6B",blanco:"#F5F5F7"},
+  hero:{
+    titulo:"Precisión en aluminio y claridad en cristal.",
+    subtitulo:"Fabricación e instalación de ventanas, canceles, domos y cristal templado en Guadalajara.",
+    botonTexto:"Ver catálogo",
+    botonLink:"#catalogo",
+    imagenFondo:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1920&q=80"
+  },
+  seo:{
+    titulo:"Alfa y Omega | Aluminios y Cristales en Guadalajara",
+    descripcion:"Fabricación e instalación de ventanas, canceles, domos y cristal templado. Calidad en cada proyecto.",
+    keywords:"aluminio, cristal, canceles, domos, ventanas, Guadalajara"
+  },
+  seoLocal:{
+    tipo:"HomeAndConstructionBusiness",
+    horario:"Mo-Sa 09:00-19:00",
+    latitud:20.6737,longitud:-103.3447,
+    ciudad:"Guadalajara",estado:"Jalisco",cp:"44100",pais:"MX",
+    precioRango:"$$",
+    areaServicio:["Guadalajara","Zapopan","Tlaquepaque","Tonalá","Tlajomulco"]
+  },
+  redes:{facebook:"",instagram:"",tiktok:""},
+
+  servicios:[
+    {id:"corredizo",nombre:"Sistema Corredizo",descripcion:"Ventanas y canceles de desplazamiento suave con perfiles de aluminio de alta resistencia."},
+    {id:"abatible",nombre:"Sistema Abatible",descripcion:"Máxima ventilación y sellado hermético para climas exigentes."},
+    {id:"fijo",nombre:"Sistema Fijo",descripcion:"Paños fijos de cristal templado para vistas panorámicas sin interrupciones."},
+    {id:"plegable",nombre:"Sistema Plegable",descripcion:"Abre por completo tus espacios hacia terrazas y jardines."},
+    {id:"domo",nombre:"Domos",descripcion:"Iluminación natural y protección contra la intemperie."},
+    {id:"cristal-templado",nombre:"Cristal Templado",descripcion:"Barandales, mamparas y divisiones de cristal de seguridad."}
+  ],
+
+  /* CATÁLOGO — Imágenes demo de Unsplash, reemplaza por las tuyas */
+  catalogo:[
+    {id:1,titulo:'Cancel Corredizo Serie 3"',categoria:"corredizo",etiqueta:"Corredizo",descripcion:"Perfil de aluminio color natural, cristal claro 6 mm.",acabado:"Aluminio natural",medidas:"A medida",destacado:true,imagen:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"},
+    {id:2,titulo:"Ventana Abatible Proyectante",categoria:"abatible",etiqueta:"Abatible",descripcion:"Sellado hermético, ideal para recámaras y oficinas.",acabado:"Blanco mate",medidas:"60×120 a 120×180 cm",destacado:false,imagen:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"},
+    {id:3,titulo:"Fijo Panorámico 10 mm",categoria:"fijo",etiqueta:"Fijo",descripcion:"Cristal templado de 10 mm para vistas sin interrupciones.",acabado:"Cristal incoloro",medidas:"A medida",destacado:true,imagen:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80"},
+    {id:4,titulo:"Plegable Terraza Premium",categoria:"plegable",etiqueta:"Plegable",descripcion:"Sistema de apertura total para exteriores.",acabado:"Negro mate",medidas:"Hasta 3 m de claro",destacado:false,imagen:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80"},
+    {id:5,titulo:"Domo Fijo Cuadrado",categoria:"domo",etiqueta:"Domo",descripcion:"Iluminación natural y aislamiento térmico.",acabado:"Aluminio blanco",medidas:"1×1 a 2×2 m",destacado:true,imagen:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80"},
+    {id:6,titulo:"Barandal Cristal Templado",categoria:"cristal-templado",etiqueta:"Cristal Templado",descripcion:"Cristal de seguridad 10 mm con herrajes de acero inox.",acabado:"Acero pulido",medidas:"A medida",destacado:false,imagen:"https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=800&q=80"},
+    {id:7,titulo:"Cancel Baño Cristal 8 mm",categoria:"especiales",etiqueta:"Especiales",descripcion:"Diseño a medida con cristal templado 8 mm.",acabado:"Cromado espejo",medidas:"A medida",destacado:true,imagen:"https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80"},
+    {id:8,titulo:"Acoples y Perfiles",categoria:"acoples",etiqueta:"Acoples",descripcion:"Refacciones originales para mantenimiento.",acabado:"Natural",medidas:"Estándar",destacado:false,imagen:"https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80"}
+  ],
+
+  proyectos:[
+    {titulo:"Cancelería residencial",categoria:"corredizo",ubicacion:"Zapopan, Jalisco",imagen:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&q=80"},
+    {titulo:"Fachada de cristal templado",categoria:"cristal-templado",ubicacion:"Guadalajara Centro",imagen:"https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"},
+    {titulo:"Domo para casa habitación",categoria:"domo",ubicacion:"Tlaquepaque",imagen:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80"},
+    {titulo:"Ventanas abatibles",categoria:"abatible",ubicacion:"Zapopan",imagen:"https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80"},
+    {titulo:"Canceles de baño",categoria:"especiales",ubicacion:"Guadalajara",imagen:"https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80"},
+    {titulo:"Puertas plegables",categoria:"plegable",ubicacion:"Puerto Vallarta",imagen:"https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80"}
+  ]
+};
+
+/* ============================================================
+   LÓGICA — No necesitas editar debajo
+   ============================================================ */
+document.addEventListener("DOMContentLoaded",()=>{
+  const C = CONFIG;
+  const $ = id => document.getElementById(id);
+  const etiquetas = {
+    todos:"Todos",corredizo:"Corredizo",abatible:"Abatible",fijo:"Fijo",
+    plegable:"Plegable",domo:"Domos","cristal-templado":"Cristal Templado",
+    acoples:"Acoples",especiales:"Especiales"
+  };
+
+  /* ---------- Colores dinámicos ---------- */
+  const root = document.documentElement;
+  Object.entries(C.colores).forEach(([k,v])=>{
+    const map = {carbon:"--carbon",plata:"--plata",dorado:"--dorado",blanco:"--blanco"};
+    root.style.setProperty(map[k],v);
+  });
+
+  /* ---------- SEO ---------- */
+  document.title = C.seo.titulo;
+  document.querySelector('meta[name="description"]').content = C.seo.descripcion;
+  document.querySelector('meta[name="keywords"]').content = C.seo.keywords;
+
+  /* ---------- Header ---------- */
+  $("logo").src = C.marca.logo;
+  $("header-phone").textContent = C.marca.telefono;
+  $("header-phone").href = C.marca.telefonoLink;
+
+  /* ---------- Hero ---------- */
+  $("hero").style.backgroundImage = `url('${C.hero.imagenFondo}')`;
+
+  /* ---------- Servicios ---------- */
+  $("servicios-grid").innerHTML = C.servicios.map(s=>`
+    <div class="card" data-anim="zoom">
+      <h3>${s.nombre}</h3>
+      <p>${s.descripcion}</p>
+    </div>
+  `).join("");
+
+  /* ---------- Proyectos ---------- */
+  $("proyectos-grid").innerHTML = C.proyectos.map(p=>`
+    <article class="proyecto" data-anim="zoom">
+      <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" />
+      <div class="proyecto__overlay">
+        <span>${etiquetas[p.categoria] || p.categoria}</span>
+        <h3>${p.titulo}</h3>
+      </div>
+    </article>
+  `).join("");
+
+  /* ---------- Contacto ---------- */
+  const waMsg = encodeURIComponent("Hola, quiero cotizar un proyecto de aluminio y cristal.");
+  $("contacto-wa").href = `https://wa.me/${C.marca.whatsapp}?text=${waMsg}`;
+  $("contacto-tel").textContent = C.marca.telefono;
+  $("contacto-tel").href = C.marca.telefonoLink;
+
+  /* ---------- Footer ---------- */
+  $("footer-text").innerHTML =
+    `© ${new Date().getFullYear()} <strong>${C.marca.nombreCompleto}</strong> · ${C.marca.lema} · ${C.marca.direccion}`;
+
+  /* ============================================================
+     CATÁLOGO PREMIUM
+     ============================================================ */
+  const catFiltrosEl = $("catalogo-filtros");
+  const catGridEl = $("catalogo-grid");
+
+  $("catalogo-wa").href = `https://wa.me/${C.marca.whatsapp}?text=${encodeURIComponent(
+    "Hola, me interesa cotizar un producto del catálogo."
+  )}`;
+
+  const catCategorias = ["todos",...new Set(C.catalogo.map(p=>p.categoria))];
+
+  catFiltrosEl.innerHTML = catCategorias.map((cat,i)=>`
+    <button class="filtro ${i===0?"active":""}" data-cat="${cat}">
+      ${etiquetas[cat]||cat}
+    </button>
+  `).join("");
+
+  const renderCatalogo = (filtro="todos")=>{
+    const items = filtro==="todos" ? C.catalogo : C.catalogo.filter(p=>p.categoria===filtro);
+    if(!items.length){
+      catGridEl.innerHTML = `<p class="catalogo__vacio">Sin resultados en esta categoría.</p>`;
+      return;
+    }
+    catGridEl.innerHTML = items.map((p,i)=>`
+      <article class="cat-card" data-id="${p.id}" data-cat="${p.categoria}" tabindex="0"
+               style="transition-delay:${(i%6)*60}ms">
+        <div class="cat-card__media">
+          ${p.destacado?`<span class="cat-card__badge">Destacado</span>`:""}
+          <img src="${p.imagen}" alt="${p.titulo}" loading="lazy" />
+          <div class="cat-card__action" aria-hidden="true">↗</div>
+          <div class="cat-card__overlay">
+            <span class="cat-card__cat">${p.etiqueta}</span>
+            <h3 class="cat-card__titulo">${p.titulo}</h3>
+            <p class="cat-card__desc">${p.descripcion}</p>
+            <div class="cat-card__meta">
+              <span><strong>Acabado:</strong> ${p.acabado}</span>
+              <span><strong>Medidas:</strong> ${p.medidas}</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    `).join("");
+
+    // Animación stagger
+    const cards = catGridEl.querySelectorAll(".cat-card");
+    if("IntersectionObserver" in window){
+      const io = new IntersectionObserver((entries)=>{
+        entries.forEach((entry,idx)=>{
+          if(entry.isIntersecting){
+            setTimeout(()=>entry.target.classList.add("in-view"), idx*60);
+            io.unobserve(entry.target);
+          }
+        });
+      },{threshold:0.15,rootMargin:"0px 0px -40px 0px"});
+      cards.forEach(c=>io.observe(c));
+    } else {
+      cards.forEach(c=>c.classList.add("in-view"));
+    }
+  };
+
+  renderCatalogo();
+
+  catFiltrosEl.addEventListener("click",(e)=>{
+    const btn = e.target.closest(".filtro");
+    if(!btn) return;
+    catFiltrosEl.querySelectorAll(".filtro").forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    catGridEl.style.opacity = "0";
+    catGridEl.style.transform = "translateY(10px)";
+    setTimeout(()=>{
+      renderCatalogo(btn.dataset.cat);
+      catGridEl.style.opacity = "1";
+      catGridEl.style.transform = "translateY(0)";
+    },220);
+  });
+
+  /* ============================================================
+     LIGHTBOX
+     ============================================================ */
+  const lightbox = $("lightbox");
+  const lightboxImg = $("lightbox-img");
+  let imagenes = [];
+  let indexActual = 0;
+
+  // Recolecta fotos del catálogo y proyectos
+  C.catalogo.forEach(p => imagenes.push({src:p.imagen, alt:p.titulo}));
+  C.proyectos.forEach(p => imagenes.push({src:p.imagen, alt:p.titulo}));
+
+  const abrirLightbox = (i)=>{
+    indexActual = i;
+    lightboxImg.src = imagenes[i].src;
+    lightboxImg.alt = imagenes[i].alt;
+    lightbox.classList.add("open");
+    document.body.style.overflow = "hidden";
+  };
+  const cerrarLightbox = ()=>{
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  const mover = (dir)=>{
+    indexActual = (indexActual + dir + imagenes.length) % imagenes.length;
+    lightboxImg.src = imagenes[indexActual].src;
+    lightboxImg.alt = imagenes[indexActual].alt;
+  };
+
+  // Click en cualquier imagen del catálogo o proyectos
+  document.querySelectorAll(".cat-card, .proyecto").forEach(el=>{
+    el.addEventListener("click",()=>{
+      const img = el.querySelector("img");
+      let idx = imagenes.findIndex(i=>i.src===img.src);
+      if(idx===-1){ imagenes.push({src:img.src,alt:img.alt}); idx=imagenes.length-1; }
+      abrirLightbox(idx);
+    });
+  });
+
+  $("lightbox-close").addEventListener("click",cerrarLightbox);
+  $("lightbox-prev").addEventListener("click",e=>{e.stopPropagation();mover(-1)});
+  $("lightbox-next").addEventListener("click",e=>{e.stopPropagation();mover(1)});
+  lightbox.addEventListener("click",e=>{if(e.target===lightbox)cerrarLightbox()});
+
+  document.addEventListener("keydown",e=>{
+    if(!lightbox.classList.contains("open")) return;
+    if(e.key==="Escape") cerrarLightbox();
+    if(e.key==="ArrowLeft") mover(-1);
+    if(e.key==="ArrowRight") mover(1);
+  });
+
+  // Swipe móvil
+  let touchX = 0;
+  lightbox.addEventListener("touchstart",e=>{touchX = e.touches[0].clientX});
+  lightbox.addEventListener("touchend",e=>{
+    const dx = e.changedTouches[0].clientX - touchX;
+    if(Math.abs(dx)>50) mover(dx>0?-1:1);
+  });
+
+  /* ============================================================
+     MENÚ MÓVIL
+     ============================================================ */
+  const toggle = $("menu-toggle");
+  const nav = $("menu-nav");
+  toggle.addEventListener("click",()=>{
+    const abierto = nav.classList.toggle("open");
+    toggle.classList.toggle("active",abierto);
+    toggle.setAttribute("aria-expanded",abierto);
+  });
+  nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{
+    nav.classList.remove("open");
+    toggle.classList.remove("active");
+  }));
+
+  /* ============================================================
+     ANIMACIONES SCROLL
+     ============================================================ */
+  if("IntersectionObserver" in window){
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.15,rootMargin:"0px 0px -50px 0px"});
+    document.querySelectorAll("[data-anim], .card, .proyecto").forEach(el=>observer.observe(el));
+  } else {
+    document.querySelectorAll("[data-anim], .card, .proyecto").forEach(el=>el.classList.add("in-view"));
+  }
+
+  /* ============================================================
+     SCHEMA.ORG JSON-LD
+     ============================================================ */
+  const SL = C.seoLocal;
+  const schema = {
+    "@context":"https://schema.org",
+    "@type":SL.tipo,
+    "name":C.marca.nombreCompleto,
+    "description":C.seo.descripcion,
+    "telephone":C.marca.telefono,
+    "email":C.marca.email,
+    "priceRange":SL.precioRango,
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":C.marca.direccion,
+      "addressLocality":SL.ciudad,
+      "addressRegion":SL.estado,
+      "postalCode":SL.cp,
+      "addressCountry":SL.pais
+    },
+    "geo":{"@type":"GeoCoordinates","latitude":SL.latitud,"longitude":SL.longitud},
+    "openingHours":SL.horario,
+    "areaServed":SL.areaServicio.map(c=>({"@type":"City","name":c})),
+    "makesOffer":C.servicios.map(s=>({
+      "@type":"Offer",
+      "itemOffered":{"@type":"Service","name":s.nombre,"description":s.descripcion}
+    }))
+  };
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.textContent = JSON.stringify(schema);
+  document.head.appendChild(script);
+});-                    { "nombre": "Zoclo / Cabezal de 3\"", "cantidad": 3, "formula": "(ancho - 167) / 3",
 -                    "corte": "90°" },
 -                    { "nombre": "Cerco chapa fija", "cantidad": 1, "formula": "alto", "corte": "90°" },
 -                    { "nombre": "Cerco chapa corredizo", "cantidad": 1, "formula": "alto - 40", "corte": "90°" },
